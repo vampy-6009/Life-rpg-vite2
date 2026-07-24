@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="bgGlow" cx="50%" cy="38%" r="75%">
+      <stop offset="0%" stop-color="#151A30"/>
+      <stop offset="100%" stop-color="#090B18"/>
+    </radialGradient>
+    <linearGradient id="bladeGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#00E676"/>
+      <stop offset="60%" stop-color="#7C4DFF"/>
+      <stop offset="100%" stop-color="#C9B8FF"/>
+    </linearGradient>
+    <linearGradient id="hiltGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFC107"/>
+      <stop offset="100%" stop-color="#FFE9A8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- NOTE: this master was revised after the first version tested
+       illegible at real launcher sizes (48px legacy icon, adaptive
+       safe-zone scaling). Proportions here are authored directly at
+       icon scale (bold, short, wide shapes) rather than as a detailed
+       512px illustration scaled down — see ic_launcher_foreground.svg
+       for the rationale in full. -->
+
+  <rect width="512" height="512" fill="url(#bgGlow)"/>
+  <circle cx="256" cy="256" r="196" fill="none" stroke="#7C4DFF" stroke-opacity="0.18" stroke-width="10"/>
+
+  <path d="M256 96 L340 246 L256 302 L172 246 Z" fill="url(#bladeGrad)"/>
+  <rect x="142" y="284" width="228" height="46" rx="23" fill="url(#hiltGrad)"/>
+  <rect x="218" y="322" width="76" height="104" rx="28" fill="#22263D" stroke="#7C4DFF" stroke-width="14"/>
+  <circle cx="256" cy="440" r="33" fill="url(#hiltGrad)"/>
+</svg>

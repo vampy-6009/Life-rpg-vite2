@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="108" height="108">
+  <defs>
+    <radialGradient id="bgGlow" cx="50%" cy="38%" r="75%">
+      <stop offset="0%" stop-color="#151A30"/>
+      <stop offset="100%" stop-color="#090B18"/>
+    </radialGradient>
+    <linearGradient id="bladeGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#00E676"/>
+      <stop offset="60%" stop-color="#7C4DFF"/>
+      <stop offset="100%" stop-color="#C9B8FF"/>
+    </linearGradient>
+    <linearGradient id="hiltGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFC107"/>
+      <stop offset="100%" stop-color="#FFE9A8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- background: same bold-redesign proportions as the adaptive foreground,
+       just composited onto the dark glow directly for legacy launchers
+       that don't support the two-layer adaptive icon format. -->
+  <rect width="108" height="108" fill="url(#bgGlow)"/>
+  <circle cx="54" cy="54" r="41" fill="none" stroke="#7C4DFF" stroke-opacity="0.18" stroke-width="2.2"/>
+
+  <path d="M54 20 L72 52 L54 64 L36 52 Z" fill="url(#bladeGrad)"/>
+  <rect x="30" y="60" width="48" height="10" rx="5" fill="url(#hiltGrad)"/>
+  <rect x="46" y="68" width="16" height="22" rx="6" fill="#22263D" stroke="#7C4DFF" stroke-width="3"/>
+  <circle cx="54" cy="93" r="7" fill="url(#hiltGrad)"/>
+</svg>

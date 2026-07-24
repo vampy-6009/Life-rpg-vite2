@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="108" height="108">
+  <defs>
+    <linearGradient id="bladeGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#00E676"/>
+      <stop offset="60%" stop-color="#7C4DFF"/>
+      <stop offset="100%" stop-color="#C9B8FF"/>
+    </linearGradient>
+    <linearGradient id="hiltGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFC107"/>
+      <stop offset="100%" stop-color="#FFE9A8"/>
+    </linearGradient>
+  </defs>
+
+  <!--
+    Redesign rationale: the first version's sword (thin 4px centerline,
+    16px chevron strokes on a 512px canvas) tested illegible once scaled
+    to real launcher sizes (48px legacy, and the adaptive safe-zone scale
+    which shrinks content further). This version drops the separate
+    chevron strokes entirely and thickens every remaining shape so the
+    silhouette still reads as "a sword" at 48px and inside a masked
+    circle, which is the actual bar adaptive icons must clear.
+
+    Coordinates authored directly in the 108x108 canvas, filling most of
+    the ~66dp safe-zone circle centered at (54,54) rather than scaling
+    down from the old 512px master.
+  -->
+
+  <!-- broad blade: short, wide diamond instead of a tall thin one -->
+  <path d="M54 20 L72 52 L54 64 L36 52 Z" fill="url(#bladeGrad)"/>
+
+  <!-- crossguard: thick bar, no separate centerline hairline -->
+  <rect x="30" y="60" width="48" height="10" rx="5" fill="url(#hiltGrad)"/>
+
+  <!-- grip: short and wide enough to survive downscaling -->
+  <rect x="46" y="68" width="16" height="22" rx="6" fill="#22263D" stroke="#7C4DFF" stroke-width="3"/>
+
+  <!-- pommel: large single dot reads clearly even as a blob at 48px -->
+  <circle cx="54" cy="93" r="7" fill="url(#hiltGrad)"/>
+</svg>

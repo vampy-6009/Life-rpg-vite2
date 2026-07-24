@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#090B18" />
+  <title>Life RPG</title>
+  <link rel="stylesheet" href="/src/css/style.css" />
+  <link rel="stylesheet" href="/src/css/animations.css" />
+</head>
+<body>
+
+  <!-- SCREEN 1: SPLASH -->
+  <section id="screen-splash" class="screen screen--active screen--splash">
+    <div class="splash-logo" aria-hidden="true">⚔️</div>
+    <h1 class="splash-title">LIFE RPG</h1>
+    <p class="splash-subtitle">Level up yourself</p>
+    <div class="loading-bar">
+      <div class="loading-bar__fill"></div>
+    </div>
+    <p class="loading-label">Loading...</p>
+  </section>
+
+  <!-- PERMISSION PRE-PROMPT (custom screen, shown before native dialog) -->
+  <section id="screen-permission-prompt" class="screen screen--permission">
+    <h2 class="permission-title">Welcome Hero!</h2>
+    <p class="permission-lead">Life RPG needs:</p>
+
+    <div class="permission-item">
+      <span class="permission-item__icon" aria-hidden="true">🔔</span>
+      <div>
+        <div class="permission-item__title">Notifications</div>
+        <div class="permission-item__desc">To remind you about daily quests.</div>
+      </div>
+    </div>
+
+    <div class="permission-item">
+      <span class="permission-item__icon" aria-hidden="true">💾</span>
+      <div>
+        <div class="permission-item__title">Storage</div>
+        <div class="permission-item__desc">To safely save your progress.</div>
+      </div>
+    </div>
+
+    <button id="permission-continue-btn" class="primary-btn">Continue</button>
+  </section>
+
+  <!-- SCREEN 2: CHARACTER CREATION -->
+  <section id="screen-character-creation" class="screen screen--character-creation">
+    <h2 class="section-title">Create Your Hero</h2>
+
+    <div class="avatar-circle" aria-hidden="true">
+      <span id="creation-avatar-icon">🧑</span>
+    </div>
+
+    <label class="field-label" for="hero-name-input">Name</label>
+    <input id="hero-name-input" class="text-input" type="text" placeholder="Enter your hero's name" maxlength="20" />
+
+    <p class="field-label field-label--spaced">Choose Class</p>
+    <div class="class-grid">
+      <button class="class-card" data-class-id="warrior">
+        <span class="class-card__icon">⚔️</span>
+        <span class="class-card__label">Warrior</span>
+      </button>
+      <button class="class-card" data-class-id="mage">
+        <span class="class-card__icon">🔮</span>
+        <span class="class-card__label">Mage</span>
+      </button>
+      <button class="class-card" data-class-id="ninja">
+        <span class="class-card__icon">🥷</span>
+        <span class="class-card__label">Ninja</span>
+      </button>
+      <button class="class-card" data-class-id="explorer">
+        <span class="class-card__icon">🧭</span>
+        <span class="class-card__label">Explorer</span>
+      </button>
+    </div>
+
+    <p id="character-creation-error" class="error-text" role="alert"></p>
+
+    <button id="character-continue-btn" class="primary-btn">Continue</button>
+  </section>
+
+  <!-- SCREEN 3: HOME DASHBOARD -->
+  <section id="screen-home" class="screen screen--home">
+    <div class="player-card">
+      <div class="player-card__avatar" id="player-avatar-icon" aria-hidden="true">⚔️</div>
+      <div class="player-card__info">
+        <div class="player-card__name" id="player-name">Hero</div>
+        <div class="player-card__level" id="player-level-line">Level 1</div>
+      </div>
+      <div class="player-card__coins">
+        <span aria-hidden="true">🪙</span>
+        <span id="player-coins">0</span>
+      </div>
+    </div>
+
+    <div class="xp-container">
+      <div class="xp-fill" id="xp-fill"></div>
+    </div>
+    <div class="xp-label" id="xp-label">0 / 1000 XP</div>
+
+    <h3 class="quests-heading">Today's Quests</h3>
+    <div id="quest-list" class="quest-list"></div>
+
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <button class="bottom-nav__btn bottom-nav__btn--active" data-nav="home" aria-current="page">
+        <span aria-hidden="true">🏠</span>Home
+      </button>
+      <button class="bottom-nav__btn" data-nav="hero">
+        <span aria-hidden="true">🧑</span>Hero
+      </button>
+      <button class="bottom-nav__btn" data-nav="quest">
+        <span aria-hidden="true">📜</span>Quest
+      </button>
+      <button class="bottom-nav__btn" data-nav="skills">
+        <span aria-hidden="true">🌟</span>Skills
+      </button>
+      <button class="bottom-nav__btn" data-nav="more">
+        <span aria-hidden="true">⋯</span>More
+      </button>
+    </nav>
+  </section>
+
+  <!-- SCREEN: HERO -->
+  <section id="screen-hero" class="screen screen--sub">
+    <header class="sub-header">
+      <h2 class="sub-header__title">Hero</h2>
+    </header>
+
+    <div class="hero-avatar-block">
+      <div class="avatar-circle avatar-circle--large" id="hero-avatar-icon" aria-hidden="true">⚔️</div>
+      <div class="hero-name" id="hero-name">Hero</div>
+      <div class="hero-class-line" id="hero-class-line">Level 1</div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-pill">
+        <span class="stat-pill__icon" aria-hidden="true">❤️</span>
+        <span class="stat-pill__label">Health</span>
+        <span class="stat-pill__value" id="hero-health">100</span>
+      </div>
+      <div class="stat-pill">
+        <span class="stat-pill__icon" aria-hidden="true">⚡</span>
+        <span class="stat-pill__label">Energy</span>
+        <span class="stat-pill__value" id="hero-energy">100</span>
+      </div>
+    </div>
+
+    <h3 class="section-subheading">Attributes</h3>
+    <div class="attr-list" id="hero-attr-list"></div>
+
+    <h3 class="section-subheading">Journey</h3>
+    <div class="journey-stats">
+      <div class="journey-stat">
+        <span class="journey-stat__value" id="hero-quests-completed">0</span>
+        <span class="journey-stat__label">Quests completed</span>
+      </div>
+      <div class="journey-stat">
+        <span class="journey-stat__value" id="hero-days-active">1</span>
+        <span class="journey-stat__label">Days as a hero</span>
+      </div>
+    </div>
+
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <button class="bottom-nav__btn" data-nav="home"><span aria-hidden="true">🏠</span>Home</button>
+      <button class="bottom-nav__btn bottom-nav__btn--active" data-nav="hero" aria-current="page"><span aria-hidden="true">🧑</span>Hero</button>
+      <button class="bottom-nav__btn" data-nav="quest"><span aria-hidden="true">📜</span>Quest</button>
+      <button class="bottom-nav__btn" data-nav="skills"><span aria-hidden="true">🌟</span>Skills</button>
+      <button class="bottom-nav__btn" data-nav="more"><span aria-hidden="true">⋯</span>More</button>
+    </nav>
+  </section>
+
+  <!-- SCREEN: QUEST (full history + add custom quest) -->
+  <section id="screen-quest" class="screen screen--sub">
+    <header class="sub-header">
+      <h2 class="sub-header__title">Quests</h2>
+    </header>
+
+    <button id="add-quest-btn" class="secondary-btn">+ Add a quest</button>
+
+    <div id="add-quest-form" class="add-quest-form add-quest-form--hidden">
+      <input id="new-quest-title" class="text-input text-input--compact" type="text" placeholder="Quest title" maxlength="60" />
+      <div class="add-quest-form__row">
+        <input id="new-quest-xp" class="text-input text-input--number" type="number" placeholder="XP" min="0" max="1000" value="50" />
+        <input id="new-quest-coins" class="text-input text-input--number" type="number" placeholder="Coins" min="0" max="500" value="10" />
+      </div>
+      <div class="add-quest-form__row">
+        <button id="new-quest-cancel" class="secondary-btn secondary-btn--flex">Cancel</button>
+        <button id="new-quest-save" class="primary-btn primary-btn--flex">Add Quest</button>
+      </div>
+    </div>
+
+    <h3 class="section-subheading">Today</h3>
+    <div id="quest-list-full" class="quest-list"></div>
+
+    <h3 class="section-subheading">History</h3>
+    <div id="quest-history-list" class="quest-list"></div>
+
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <button class="bottom-nav__btn" data-nav="home"><span aria-hidden="true">🏠</span>Home</button>
+      <button class="bottom-nav__btn" data-nav="hero"><span aria-hidden="true">🧑</span>Hero</button>
+      <button class="bottom-nav__btn bottom-nav__btn--active" data-nav="quest" aria-current="page"><span aria-hidden="true">📜</span>Quest</button>
+      <button class="bottom-nav__btn" data-nav="skills"><span aria-hidden="true">🌟</span>Skills</button>
+      <button class="bottom-nav__btn" data-nav="more"><span aria-hidden="true">⋯</span>More</button>
+    </nav>
+  </section>
+
+  <!-- SCREEN: SKILLS -->
+  <section id="screen-skills" class="screen screen--sub">
+    <header class="sub-header">
+      <h2 class="sub-header__title">Skills</h2>
+      <div class="sub-header__coins"><span aria-hidden="true">🪙</span><span id="skills-coins">0</span></div>
+    </header>
+
+    <p class="skills-lead">Spend coins to raise your attributes. Each point costs a little more than the last.</p>
+
+    <div id="skills-list" class="skills-list"></div>
+
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <button class="bottom-nav__btn" data-nav="home"><span aria-hidden="true">🏠</span>Home</button>
+      <button class="bottom-nav__btn" data-nav="hero"><span aria-hidden="true">🧑</span>Hero</button>
+      <button class="bottom-nav__btn" data-nav="quest"><span aria-hidden="true">📜</span>Quest</button>
+      <button class="bottom-nav__btn bottom-nav__btn--active" data-nav="skills" aria-current="page"><span aria-hidden="true">🌟</span>Skills</button>
+      <button class="bottom-nav__btn" data-nav="more"><span aria-hidden="true">⋯</span>More</button>
+    </nav>
+  </section>
+
+  <!-- SCREEN: MORE (hub for Inventory / Achievements / Settings) -->
+  <section id="screen-more" class="screen screen--sub">
+    <header class="sub-header">
+      <h2 class="sub-header__title">More</h2>
+    </header>
+
+    <div class="more-menu">
+      <button class="more-menu__item" data-nav="inventory">
+        <span class="more-menu__icon" aria-hidden="true">🎒</span>
+        <span class="more-menu__label">Inventory</span>
+        <span class="more-menu__chevron" aria-hidden="true">›</span>
+      </button>
+      <button class="more-menu__item" data-nav="achievements">
+        <span class="more-menu__icon" aria-hidden="true">🏆</span>
+        <span class="more-menu__label">Achievements</span>
+        <span class="more-menu__chevron" aria-hidden="true">›</span>
+      </button>
+      <button class="more-menu__item" data-nav="settings">
+        <span class="more-menu__icon" aria-hidden="true">⚙️</span>
+        <span class="more-menu__label">Settings</span>
+        <span class="more-menu__chevron" aria-hidden="true">›</span>
+      </button>
+    </div>
+
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <button class="bottom-nav__btn" data-nav="home"><span aria-hidden="true">🏠</span>Home</button>
+      <button class="bottom-nav__btn" data-nav="hero"><span aria-hidden="true">🧑</span>Hero</button>
+      <button class="bottom-nav__btn" data-nav="quest"><span aria-hidden="true">📜</span>Quest</button>
+      <button class="bottom-nav__btn" data-nav="skills"><span aria-hidden="true">🌟</span>Skills</button>
+      <button class="bottom-nav__btn bottom-nav__btn--active" data-nav="more" aria-current="page"><span aria-hidden="true">⋯</span>More</button>
+    </nav>
+  </section>
+
+  <!-- SCREEN: INVENTORY -->
+  <section id="screen-inventory" class="screen screen--sub">
+    <header class="sub-header">
+      <button class="back-btn" data-back="more" aria-label="Back">‹</button>
+      <h2 class="sub-header__title">Inventory</h2>
+      <div class="sub-header__coins"><span aria-hidden="true">🪙</span><span id="inventory-coins">0</span></div>
+    </header>
+
+    <h3 class="section-subheading">Your Items</h3>
+    <div id="inventory-owned-list" class="inventory-list"></div>
+
+    <h3 class="section-subheading">Shop</h3>
+    <div id="inventory-shop-list" class="inventory-list"></div>
+
+    <div class="sub-screen-nav-spacer"></div>
+  </section>
+
+  <!-- SCREEN: ACHIEVEMENTS -->
+  <section id="screen-achievements" class="screen screen--sub">
+    <header class="sub-header">
+      <button class="back-btn" data-back="more" aria-label="Back">‹</button>
+      <h2 class="sub-header__title">Achievements</h2>
+    </header>
+
+    <div id="achievements-list" class="achievements-list"></div>
+
+    <div class="sub-screen-nav-spacer"></div>
+  </section>
+
+  <!-- SCREEN: SETTINGS -->
+  <section id="screen-settings" class="screen screen--sub">
+    <header class="sub-header">
+      <button class="back-btn" data-back="more" aria-label="Back">‹</button>
+      <h2 class="sub-header__title">Settings</h2>
+    </header>
+
+    <div class="settings-list">
+      <div class="settings-row">
+        <span class="settings-row__label">Sound effects</span>
+        <button id="settings-sound-toggle" class="toggle-switch" role="switch" aria-checked="true">
+          <span class="toggle-switch__knob"></span>
+        </button>
+      </div>
+      <div class="settings-row">
+        <span class="settings-row__label">Notifications</span>
+        <button id="settings-notifications-toggle" class="toggle-switch" role="switch" aria-checked="true">
+          <span class="toggle-switch__knob"></span>
+        </button>
+      </div>
+    </div>
+
+    <h3 class="section-subheading">Data</h3>
+    <button id="settings-backup-btn" class="secondary-btn">Back up now</button>
+    <p class="settings-backup-status" id="settings-backup-status"></p>
+
+    <div class="sub-screen-nav-spacer"></div>
+  </section>
+
+  <!-- Toasts -->
+  <div id="levelup-toast" class="toast toast--levelup">
+    <span class="toast__text">Level Up!</span>
+  </div>
+  <div id="repair-toast" class="toast toast--repair">
+    <span class="toast__text">Your adventure data was repaired.</span>
+  </div>
+  <div id="achievement-toast" class="toast toast--achievement">
+    <span class="toast__text">Achievement Unlocked!</span>
+  </div>
+
+  <script type="module" src="/src/js/app.js"></script>
+</body>
+</html>
