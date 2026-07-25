@@ -32,9 +32,6 @@ jobs:
       - name: Sync Capacitor Android project
         run: npx cap sync android
 
-      - name: Remove Capacitor's default adaptive-icon foreground
-        run: rm -rf android/app/src/main/res/drawable-anydpi-v24
-
       - name: Make gradlew executable
         run: chmod +x android/gradlew
 
